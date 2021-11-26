@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./database/models');
 
+const authRouter = require('./routes/Auth');
+
 const app = express();
 const port = 8000;
 
@@ -12,6 +14,8 @@ app.use(cors());
 sequelize.authenticate().then(() => {
   console.log(`Success connecting database`);
 });
+
+app.use('/auth', authRouter);
 
 app.listen(port, () => {
   console.log(`server running on port: ${port}`);
