@@ -26,7 +26,7 @@ UserType.init(
     },
   },
   {
-    modelName: 'user_type',
+    modelName: 'user_types',
     sequelize: connection,
     paranoid: false,
     timestamps: false,

@@ -46,7 +46,7 @@ User.init(
     },
   },
   {
-    modelName: 'user',
+    modelName: 'users',
     sequelize: connection,
     paranoid: false,
     timestamps: false,

@@ -8,7 +8,14 @@ const { SECRET_TOKEN } = process.env;
 
 exports.register = async (req, res, next) => {
   try {
-    const { email, password, first_name, last_name, phone_number } = req.body;
+    const {
+      email,
+      password,
+      first_name,
+      last_name,
+      phone_number,
+      user_type_id,
+    } = req.body;
 
     const user = await User.findOne({
       where: {
@@ -16,20 +23,21 @@ exports.register = async (req, res, next) => {
       },
     });
 
-    if (!user) {
+    if (user) {
       throw new Error(
         `User with this email already exists, please use other email`
       );
     }
 
-    const hashedPassword = bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     await User.create({
-      username,
+      email,
       password: hashedPassword,
       first_name,
       last_name,
       phone_number,
+      user_type_id,
     });
 
     return res.status(201).json({
@@ -70,6 +78,9 @@ exports.login = async (req, res, next) => {
       status: 'success',
       code: 200,
       message: 'successfully logged in',
+      data: {
+        access_token: accessToken,
+      },
     });
   } catch (error) {
     return next(error);

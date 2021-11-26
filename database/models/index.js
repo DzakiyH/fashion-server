@@ -1,6 +1,6 @@
 const sequelize = require('../connection');
-const User = require('./User');
-const UserType = require('./UserType');
+const User = require('./Users');
+const UserType = require('./UserTypes');
 
 UserType.hasMany(User, {
   as: 'users',

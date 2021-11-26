@@ -6,13 +6,13 @@ module.exports = {
     const password = 'pass12345';
 
     const user_types = await queryInterface.sequelize.query(
-      `SELECT u.id from user_type u`
+      `SELECT u.id from user_types u`
     );
 
     if (user_types && user_types.length > 0) {
       return Promise.all(
         user_types.map((type, index) =>
-          queryInterface.bulkInsert('user', [
+          queryInterface.bulkInsert('users', [
             {
               id: uuid.v4(),
               email: 'budi@gmail.com',
@@ -42,6 +42,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('user', null);
+    return queryInterface.bulkDelete('users', null);
   },
 };

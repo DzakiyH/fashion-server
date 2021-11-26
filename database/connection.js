@@ -8,7 +8,7 @@ const connection = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   port: parseInt(DB_PORT, 10),
   dialect: DB_DIALECT,
-  logging: Boolean(DB_LOGGING),
+  logging: false,
   pool: {
     min: 1,
     max: 5,

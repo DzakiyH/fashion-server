@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('user', {
+    return queryInterface.createTable('users', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -41,7 +41,7 @@ module.exports = {
       user_type_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'user_type',
+          model: 'user_types',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -51,6 +51,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('users');
   },
 };
