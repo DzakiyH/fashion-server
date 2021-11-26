@@ -17,6 +17,15 @@ sequelize.authenticate().then(() => {
 
 app.use('/auth', authRouter);
 
+app.use((error, req, res, next) => {
+  return res.status(400).json({
+    status: 'error',
+    code: 400,
+    message: 'Bad Request',
+    error: error.message,
+  });
+});
+
 app.listen(port, () => {
   console.log(`server running on port: ${port}`);
 });
