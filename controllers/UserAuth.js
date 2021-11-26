@@ -64,6 +64,10 @@ exports.login = async (req, res, next) => {
       throw new Error(`User with this email was not found`);
     }
 
+    if (user.user_type_id === 2) {
+      throw new Error(`You are not authorized to access this page`);
+    }
+
     const isMatch = bcrypt.compare(password, user.password);
 
     if (!isMatch) {

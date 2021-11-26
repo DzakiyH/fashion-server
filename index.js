@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./database/models');
 
-const authRouter = require('./routes/Auth');
+const userAuthRouter = require('./routes/UserAuth');
+const adminAuthRouter = require('./routes/AdminAuth');
 
 const app = express();
 const port = 8000;
@@ -15,7 +16,8 @@ sequelize.authenticate().then(() => {
   console.log(`Success connecting database`);
 });
 
-app.use('/auth', authRouter);
+app.use('/auth/user', userAuthRouter);
+app.use('/auth/admin', adminAuthRouter);
 
 app.use((error, req, res, next) => {
   return res.status(400).json({
