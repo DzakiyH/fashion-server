@@ -39,7 +39,7 @@ module.exports = {
         defaultValue: Sequelize.NOW,
       },
       user_type_id: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: {
           model: 'user_type',
           key: 'id',

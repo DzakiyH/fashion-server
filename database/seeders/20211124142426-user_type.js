@@ -4,13 +4,13 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('user_type', [
       {
-        id: uuid.v4(),
+        id: 1,
         type: 'customer',
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: uuid.v4(),
+        id: 2,
         type: 'seller',
         created_at: new Date(),
         updated_at: new Date(),

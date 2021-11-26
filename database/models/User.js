@@ -40,6 +40,10 @@ User.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    user_type_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     modelName: 'user',
