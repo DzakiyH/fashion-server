@@ -2,27 +2,11 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('products', {
+    return queryInterface.createTable('carts', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-      },
-      title: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-      },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      image: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      stock: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -34,10 +18,10 @@ module.exports = {
         allowNull: false,
         defaultValue: Sequelize.NOW,
       },
-      category_id: {
-        type: Sequelize.INTEGER,
+      user_id: {
+        type: Sequelize.UUID,
         references: {
-          model: 'categories',
+          model: 'users',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -47,6 +31,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('products');
+    return queryInterface.dropTable('carts');
   },
 };
