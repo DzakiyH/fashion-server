@@ -29,6 +29,7 @@ Categories.hasMany(Products, {
 
 Products.belongsTo(Categories, {
   foreignKey: 'category_id',
+  as: 'categories',
   targetKey: 'id',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
