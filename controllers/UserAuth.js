@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { Users } = require('../database/models');
+const { Users, Carts } = require('../database/models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -31,13 +31,17 @@ exports.register = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    await Users.create({
+    const newUser = await Users.create({
       email,
       password: hashedPassword,
       first_name,
       last_name,
       phone_number,
       user_type_id,
+    });
+
+    await Carts.create({
+      user_id: newUser.dataValues.id,
     });
 
     return res.status(201).json({
@@ -75,7 +79,7 @@ exports.login = async (req, res, next) => {
     }
 
     const accessToken = jwt.sign({ userId: user.id }, SECRET_TOKEN, {
-      expiresIn: '1h',
+      expiresIn: '24h',
     });
 
     return res.status(200).json({

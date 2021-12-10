@@ -35,7 +35,9 @@ Products.belongsTo(Categories, {
   onUpdate: 'CASCADE',
 });
 
-Users.hasOne(Carts);
+Users.hasOne(Carts, {
+  foreignKey: 'user_id',
+});
 
 Carts.belongsTo(Users, {
   foreignKey: 'user_id',

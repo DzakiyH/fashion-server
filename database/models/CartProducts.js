@@ -24,7 +24,7 @@ CartProducts.init(
     },
   },
   {
-    modelName: 'cart_roducts',
+    modelName: 'cart_products',
     sequelize: connection,
     paranoid: false,
     timestamps: false,

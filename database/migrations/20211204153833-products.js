@@ -20,6 +20,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       stock: {
         type: Sequelize.INTEGER,
         allowNull: false,
