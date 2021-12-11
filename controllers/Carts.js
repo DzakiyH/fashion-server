@@ -66,3 +66,61 @@ exports.getCartitems = async (req, res, next) => {
     console.log(error.message);
   }
 };
+
+exports.updateProductQuantity = async (req, res, next) => {
+  const { user } = req;
+  const { quantity, product_id } = req.body;
+
+  try {
+    const cart = await Carts.findOne({
+      where: {
+        user_id: user.id,
+      },
+    });
+
+    const cartProducts = await CartProducts.findOne({
+      where: {
+        product_id,
+        cart_id: cart.id,
+      },
+      include: Products,
+    });
+
+    const originalQuantity = cartProducts.quantity;
+
+    await cartProducts.update({ quantity: originalQuantity + quantity });
+
+    await cartProducts.save();
+
+    return res.status(201).json({
+      status: 'success',
+      code: 201,
+      message: 'successfully changed data',
+      data: cartProducts,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+exports.removeProduct = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const cartProducts = await CartProducts.findOne({
+      where: {
+        id,
+      },
+    });
+
+    await cartProducts.destroy();
+
+    return res.status(201).json({
+      status: 'success',
+      code: 201,
+      message: 'successfully removed products',
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
