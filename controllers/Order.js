@@ -1,9 +1,37 @@
 const {
-  Users,
+  Products,
   Orders,
   OrderProducts,
   UserAddress,
 } = require('../database/models');
+
+exports.getAllOrders = async (req, res, next) => {
+  const { user } = req;
+
+  try {
+    const userOrder = await Orders.findOne({
+      where: {
+        user_id: user.id,
+      },
+    });
+
+    const orderProducts = await OrderProducts.findAll({
+      where: {
+        order_id: userOrder.id,
+      },
+      include: Products,
+    });
+
+    return res.status(201).json({
+      status: 'success',
+      code: 201,
+      message: 'successfully created data',
+      data: orderProducts,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 exports.setNewOrder = async (req, res, next) => {
   const { user } = req;
@@ -79,4 +107,35 @@ exports.setAddress = async (req, res, next) => {
     code: 201,
     message: 'successfully created data',
   });
+};
+
+exports.setOrderProducts = async (req, res, next) => {
+  const { user } = req;
+  const products = req.body;
+
+  try {
+    const order = await Orders.findOne({
+      where: {
+        user_id: user.id,
+      },
+    });
+
+    await order.update({ status: 'paid' });
+
+    for (let i = 0; i < products.length; i++) {
+      await OrderProducts.create({
+        order_id: order.id,
+        product_id: products[i].product_id,
+        quantity: products[i].quantity,
+      });
+    }
+
+    return res.status(201).json({
+      status: 'success',
+      code: 201,
+      message: 'successfully created data',
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 };

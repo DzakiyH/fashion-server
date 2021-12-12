@@ -35,7 +35,7 @@ exports.addItemToCart = async (req, res, next) => {
       message: 'successfully added product to the cart',
     });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -121,6 +121,29 @@ exports.removeProduct = async (req, res, next) => {
       message: 'successfully removed products',
     });
   } catch (error) {
-    console.log(error.message);
+    console.log(error.message + 'remove');
+  }
+};
+
+exports.emptyCart = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const cartProducts = await CartProducts.findAll({
+      where: {
+        cart_id: id,
+      },
+    });
+
+    cartProducts.map(async (product) => {
+      return await product.destroy();
+    });
+
+    return res.status(201).json({
+      status: 'success',
+      code: 201,
+      message: 'successfully removed cart',
+    });
+  } catch (error) {
+    console.log(error.message + 'empty');
   }
 };

@@ -18,6 +18,10 @@ OrderProducts.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     modelName: 'order_products',
