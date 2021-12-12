@@ -7,6 +7,7 @@ const Carts = require('./Carts');
 const CartProducts = require('./CartProducts');
 const Orders = require('./Orders');
 const OrderProducts = require('./OrderProducts');
+const UserAddress = require('./UserAddress');
 
 UserTypes.hasMany(Users, {
   foreignKey: 'user_type_id',
@@ -97,6 +98,16 @@ OrderProducts.belongsTo(Products, {
   onUpdate: 'CASCADE',
 });
 
+Users.hasOne(UserAddress, {
+  foreignKey: 'user_id',
+});
+
+UserAddress.belongsTo(Users, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
+
 module.exports = {
   sequelize,
   Users,
@@ -107,4 +118,5 @@ module.exports = {
   CartProducts,
   Orders,
   OrderProducts,
+  UserAddress,
 };

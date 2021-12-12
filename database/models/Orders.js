@@ -18,6 +18,10 @@ Orders.init(
       type: DataTypes.UUID,
       allowNull: false,
     },
+    total_payment: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     modelName: 'orders',

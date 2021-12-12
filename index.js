@@ -6,6 +6,7 @@ const userAuthRouter = require('./routes/UserAuth');
 const adminAuthRouter = require('./routes/AdminAuth');
 const productsRouter = require('./routes/Product');
 const cartsRouter = require('./routes/Cart');
+const OrdersRouter = require('./routes/Order');
 
 const app = express();
 const port = 8000;
@@ -22,6 +23,7 @@ app.use('/auth/user', userAuthRouter);
 app.use('/auth/admin', adminAuthRouter);
 app.use('/product', productsRouter);
 app.use('/cart', cartsRouter);
+app.use('/order', OrdersRouter);
 
 app.use((error, req, res, next) => {
   return res.status(400).json({
