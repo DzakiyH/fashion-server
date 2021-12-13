@@ -13,22 +13,23 @@ const imagekit = new ImageKit({
 });
 
 exports.getAllProducts = async (req, res, next) => {
- try {
+  try {
     const products = await Products.findAll({ include: 'categories' });
 
-  if (!products) {
-    throw new Error(`can't get the products`);
-  }
+    if (!products) {
+      throw new Error(`can't get the products`);
+    }
 
-  return res.status(200).json({
-    status: 'success',
-    code: 200,
-    message: 'successfully retrived data',
-    data: products,
-  });
- } catch (error) {
-   console.log(error.message);
- }
+    return res.status(200).json({
+      status: 'success',
+      code: 200,
+      message: 'successfully retrived data',
+      data: products,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 exports.getAllCategories = async (req, res, next) => {
   const categories = await Categories.findAll();
