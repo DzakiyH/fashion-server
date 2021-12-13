@@ -4,10 +4,8 @@ const { Sequelize } = require('sequelize');
 const { DB_HOST, DB_NAME, DB_PASS, DB_USER, DB_PORT, DB_DIALECT, DB_LOGGING } =
   process.env;
 
-const connection = null;
-
 if (process.env.CLEARDB_DATABASE_URL) {
-  const sequelize = new Sequelize(DB_NAME, {
+  const connection = new Sequelize(DB_NAME, {
     port: parseInt(DB_PORT, 10),
     dialect: DB_DIALECT,
     logging: false,
@@ -19,9 +17,9 @@ if (process.env.CLEARDB_DATABASE_URL) {
     },
   });
 
-  connection = sequelize;
+  module.exports = connection;
 } else {
-  sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
+  const connection = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     host: DB_HOST,
     port: parseInt(DB_PORT, 10),
     dialect: DB_DIALECT,
@@ -33,7 +31,5 @@ if (process.env.CLEARDB_DATABASE_URL) {
       idle: 60000,
     },
   });
-  connection = sequelize;
+  module.exports = connection;
 }
-
-module.exports = connection;
