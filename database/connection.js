@@ -7,7 +7,7 @@ const { DB_HOST, DB_NAME, DB_PASS, DB_USER, DB_PORT, DB_DIALECT, DB_LOGGING } =
 const connection = null;
 
 if (process.env.CLEARDB_DATABASE_URL) {
-  connection = new Sequelize(DB_NAME, {
+  const sequelize = new Sequelize(DB_NAME, {
     port: parseInt(DB_PORT, 10),
     dialect: DB_DIALECT,
     logging: false,
@@ -18,8 +18,10 @@ if (process.env.CLEARDB_DATABASE_URL) {
       idle: 60000,
     },
   });
+
+  connection = sequelize;
 } else {
-  connection = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
+  sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     host: DB_HOST,
     port: parseInt(DB_PORT, 10),
     dialect: DB_DIALECT,
@@ -31,6 +33,7 @@ if (process.env.CLEARDB_DATABASE_URL) {
       idle: 60000,
     },
   });
+  connection = sequelize;
 }
 
 module.exports = connection;
