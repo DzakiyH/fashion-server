@@ -9,8 +9,10 @@ const productsRouter = require('./routes/Product');
 const cartsRouter = require('./routes/Cart');
 const OrdersRouter = require('./routes/Order');
 
+require('dotenv').config;
+
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
