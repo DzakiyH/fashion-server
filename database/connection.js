@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 const { DB_HOST, DB_NAME, DB_PASS, DB_USER, DB_PORT, DB_DIALECT, DB_LOGGING } =
   process.env;
 
-const connection;
+const connection = null;
 
 if (process.env.CLEARDB_DATABASE_URL) {
   connection = new Sequelize(DB_NAME, {
