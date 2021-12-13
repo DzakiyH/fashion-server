@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./database/models');
+const path = require('path');
 
 const userAuthRouter = require('./routes/UserAuth');
 const adminAuthRouter = require('./routes/AdminAuth');
@@ -18,6 +19,8 @@ app.use(cors());
 sequelize.authenticate().then(() => {
   console.log(`Success connecting database`);
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth/user', userAuthRouter);
 app.use('/auth/admin', adminAuthRouter);
