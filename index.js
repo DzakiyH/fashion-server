@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./database/models');
 const path = require('path');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
 
 const userAuthRouter = require('./routes/UserAuth');
 const adminAuthRouter = require('./routes/AdminAuth');
@@ -21,6 +24,16 @@ app.use(cors());
 sequelize.authenticate().then(() => {
   console.log(`Success connecting database`);
 });
+
+// security
+// const limiter = rateLimit({
+//   windowMs: 10 * 60 * 1000,
+//   max: 100,
+// });
+
+// app.use(limiter);
+app.use(helmet());
+app.use(xss());
 
 app.use(express.static(path.join(__dirname, 'public')));
 

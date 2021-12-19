@@ -1,34 +1,36 @@
 const { Model, DataTypes } = require('sequelize');
 const connection = require('../connection');
 
-class Orders extends Model {}
+class OrderStatuses extends Model {}
 
-Orders.init(
+OrderStatuses.init(
   {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+      autoIncrement: true,
     },
-    status_id: {
+    status: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    user_id: {
-      type: DataTypes.UUID,
+    created_at: {
+      type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: new Date(),
     },
-    total_payment: {
-      type: DataTypes.INTEGER,
+    updated_at: {
+      type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
   },
   {
-    modelName: 'orders',
+    modelName: 'order_statuses',
     sequelize: connection,
     paranoid: false,
     timestamps: false,
   }
 );
 
-module.exports = Orders;
+module.exports = OrderStatuses;

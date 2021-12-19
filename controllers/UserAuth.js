@@ -72,14 +72,14 @@ exports.login = async (req, res, next) => {
       throw new Error(`You are not authorized to access this page`);
     }
 
-    const isMatch = bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       throw new Error(`Password is not valid`);
     }
 
     const accessToken = jwt.sign({ userId: user.id }, SECRET_TOKEN, {
-      expiresIn: '24h',
+      expiresIn: '3d',
     });
 
     return res.status(200).json({
