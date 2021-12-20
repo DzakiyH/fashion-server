@@ -68,7 +68,7 @@ exports.login = async (req, res, next) => {
       throw new Error(`You are not authorized to access this page`);
     }
 
-    const isMatch = bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       throw new Error(`Password is not valid`);

@@ -22,6 +22,10 @@ Orders.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    resi: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     modelName: 'orders',

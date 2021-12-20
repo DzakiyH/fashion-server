@@ -7,6 +7,35 @@ const {
 } = require('../database/models');
 
 exports.getAllOrders = async (req, res, next) => {
+  const orderProducts = [];
+
+  try {
+    const userOrders = await Orders.findAll({
+      include: OrderStatuses,
+    });
+
+    for (let i = 0; i < userOrders.length; i++) {
+      const orderProduct = await OrderProducts.findAll({
+        where: {
+          order_id: userOrders[i].id,
+        },
+        include: Products,
+      });
+      orderProducts.push(orderProduct);
+    }
+
+    return res.status(201).json({
+      status: 'success',
+      code: 201,
+      message: 'successfully created data',
+      data: [userOrders, orderProducts],
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+exports.getUserOrders = async (req, res, next) => {
   const { user } = req;
   const orderProducts = [];
 
@@ -184,6 +213,40 @@ exports.getAllOrderProducts = async (req, res, next) => {
       message: 'successfully retrieved data',
       data: orderProducts,
     });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+exports.updateOrder = async (req, res, next) => {
+  const { id, resiNumber } = req.body;
+
+  try {
+    if (resiNumber && resiNumber !== '') {
+      const order = await Orders.findByPk(id);
+
+      order.update({ resi: resiNumber, status_id: 3 });
+
+      order.save();
+
+      return res.status(201).json({
+        status: 'success',
+        code: 201,
+        message: 'successfully updated data',
+      });
+    } else if (!resiNumber || resiNumber === '') {
+      const order = await Orders.findByPk(id);
+
+      order.update({ status_id: 4 });
+
+      order.save();
+
+      return res.status(201).json({
+        status: 'success',
+        code: 201,
+        message: 'successfully updated data',
+      });
+    }
   } catch (error) {
     console.log(error.message);
   }
