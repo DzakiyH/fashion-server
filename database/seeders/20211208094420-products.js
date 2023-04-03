@@ -10,7 +10,7 @@ module.exports = {
         title: 'men clothes',
         description: 'clothes for men',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_men_qvq2JlSD_h1.png?updatedAt=1638956838566',
+          'https://ik.imagekit.io/rdj8uzjj8gp/test-image_8pn0ZROi0.jpg?updatedAt=1679738057154',
         price: 10,
         stock: 20,
         created_at: new Date(),
@@ -22,7 +22,7 @@ module.exports = {
         title: 'women clothes',
         description: 'clothes for women',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_women_oPvVNzhhj.jpg?updatedAt=1638956840398',
+          'https://ik.imagekit.io/rdj8uzjj8gp/test-image_wdQQzFG30.jpg?updatedAt=1679738159934',
         price: 15,
         stock: 10,
         created_at: new Date(),
@@ -34,7 +34,7 @@ module.exports = {
         title: 'boy clothes',
         description: 'clothes for boys',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_boy_DpSunEoZw4.jpg?updatedAt=1638956840422',
+          'https://ik.imagekit.io/rdj8uzjj8gp/test-image_cZ-HhpRJj.jpg?updatedAt=1679738107702',
         price: 8,
         stock: 30,
         created_at: new Date(),
@@ -46,7 +46,7 @@ module.exports = {
         title: 'girl clothes',
         description: 'clothes for girls',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_girl_CmpoWgEBux.jpg?updatedAt=1638956836881',
+          'https://ik.imagekit.io/rdj8uzjj8gp/test-image_lJpfnL0o6.jpg?updatedAt=1679738189882',
         price: 12,
         stock: 10,
         created_at: new Date(),
@@ -58,7 +58,7 @@ module.exports = {
         title: 'jeans',
         description: 'really nice jeans',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_jeans_bIzJotQN5J.jpg?updatedAt=1638956838073',
+          'https://ik.imagekit.io/rdj8uzjj8gp/test-image_GTvKi-gnMjz.jpg?updatedAt=1639401920178',
         price: 20,
         stock: 15,
         created_at: new Date(),
@@ -70,7 +70,7 @@ module.exports = {
         title: 'socks',
         description: 'really nice socks',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_socks_nFc0bB4d_Bd5.jpg?updatedAt=1638956838586',
+          'https://ik.imagekit.io/rdj8uzjj8gp/test-image_f0q49FEdF6.jpg?updatedAt=1679738204067',
         price: 5,
         stock: 40,
         created_at: new Date(),
@@ -82,7 +82,7 @@ module.exports = {
         title: 'shoes',
         description: 'really nice shoes',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_shoes_bcYe9N-DH.jpg?updatedAt=1638956838650',
+          'https://ik.imagekit.io/rdj8uzjj8gp/test-image_ETjnpJZ9O.jpg?updatedAt=1679738173759',
         price: 35,
         stock: 10,
         created_at: new Date(),
@@ -94,7 +94,7 @@ module.exports = {
         title: 'eyeglasses',
         description: 'really nice eyeglasses',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_eyeglasses_vOvLUkO3rcI.jpg?updatedAt=1638956837914',
+          'https://ik.imagekit.io/rdj8uzjj8gp/test-image_hMpX8f-cB.jpg?updatedAt=1679738142335',
         price: 20,
         stock: 7,
         created_at: new Date(),
@@ -106,7 +106,7 @@ module.exports = {
         title: 'wristwatch',
         description: 'really nice wristwatches',
         image:
-          'https://ik.imagekit.io/rdj8uzjj8gp/fashionlution/product_wristwatch_K0thprUNvJCp.jpg?updatedAt=1638956842087',
+          'https://ik.imagekit.io/rdj8uzjj8gp/product_wristwatch_Mo9zD9JbE.jpg?updatedAt=1680534344075',
         price: 50,
         stock: 3,
         created_at: new Date(),
