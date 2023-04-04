@@ -5,6 +5,7 @@ const path = require('path');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
+const compression = require('compression');
 
 const userAuthRouter = require('./routes/UserAuth');
 const adminAuthRouter = require('./routes/AdminAuth');
@@ -15,16 +16,14 @@ const OrdersRouter = require('./routes/Order');
 require('dotenv').config;
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-
-sequelize.authenticate().then(() => {
-  console.log(`Success connecting database`);
-});
-
+app.use(xss());
+app.use(helmet());
+app.use(compression());
 // security
 // const limiter = rateLimit({
 //   windowMs: 10 * 60 * 1000,
@@ -32,8 +31,10 @@ sequelize.authenticate().then(() => {
 // });
 
 // app.use(limiter);
-app.use(helmet());
-app.use(xss());
+
+sequelize.authenticate().then(() => {
+  console.log(`Success connecting database`);
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -52,6 +53,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(port, () => {
+app.listen({ port, host: '0.0.0.0' }, () => {
   console.log(`server running on port: ${port}`);
 });

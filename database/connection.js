@@ -4,8 +4,8 @@ const { Sequelize } = require('sequelize');
 const { DB_HOST, DB_NAME, DB_PASS, DB_USER, DB_PORT, DB_DIALECT, DB_LOGGING } =
   process.env;
 
-if (process.env.CLEARDB_DATABASE_URL) {
-  const connection = new Sequelize(process.env.CLEARDB_DATABASE_URL, {
+if (process.env.DATABASE_URL) {
+  const connection = new Sequelize(process.env.DATABASE_URL, {
     port: parseInt(DB_PORT, 10),
     dialect: DB_DIALECT,
     logging: false,
