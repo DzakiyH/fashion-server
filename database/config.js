@@ -1,18 +1,11 @@
 require('dotenv').config();
 
-const {
-  DB_NAME,
-  DB_PASS,
-  DB_USER,
-  DB_PORT,
-  DB_DIALECT,
-  DB_LOGGING,
-  DATABASE_URL,
-} = process.env;
+const { DB_NAME, DB_HOST, DB_PASS, DB_USER, DB_PORT, DB_DIALECT, DB_LOGGING } =
+  process.env;
 
 let sequelizeConfig = {
   dialect: DB_DIALECT,
-  host: DATABASE_URL,
+  host: DB_HOST,
   port: parseInt(DB_PORT, 10),
   username: DB_USER,
   password: DB_PASS,

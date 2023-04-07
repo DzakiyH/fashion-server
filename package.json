@@ -6,10 +6,9 @@
   "scripts": {
     "dev": "nodemon index",
     "start": "node index",
-    "createdb": "node ./utils/createDatabase.js",
     "migratedb": "npx sequelize db:migrate",
     "seeddb": "npx sequelize db:seed:all",
-    "db": "yarn createdb && yarn migratedb && yarn seeddb"
+    "db": "yarn migratedb && yarn seeddb"
   },
   "author": "",
   "license": "ISC",
