@@ -42,7 +42,7 @@ exports.getUserOrders = async (req, res, next) => {
   try {
     const userOrders = await Orders.findAll({
       where: {
-        user_id: user.id,
+        user_id: user.dataValues.id,
       },
       include: OrderStatuses,
     });
@@ -73,20 +73,23 @@ exports.setNewOrder = async (req, res, next) => {
   const { total_payment } = req.body;
 
   try {
-    await Orders.create({
-      user_id: user.id,
+    const newOrder = await Orders.create({
+      user_id: user.dataValues.id,
       total_payment,
       status_id: 1,
+    });
+
+    return res.status(201).json({
+      status: 'success',
+      code: 201,
+      message: 'successfully created data',
+      data: {
+        orderId: newOrder.dataValues.id,
+      },
     });
   } catch (error) {
     console.log(error.message);
   }
-
-  return res.status(201).json({
-    status: 'success',
-    code: 201,
-    message: 'successfully created data',
-  });
 };
 
 exports.setAddress = async (req, res, next) => {
@@ -104,7 +107,7 @@ exports.setAddress = async (req, res, next) => {
   try {
     const userAddress = await UserAddress.findOne({
       where: {
-        user_id: user.id,
+        user_id: user.dataValues.id,
       },
     });
 
@@ -117,7 +120,7 @@ exports.setAddress = async (req, res, next) => {
         city,
         postal_code,
         phone_number,
-        user_id: user.id,
+        user_id: user.dataValues.id,
       });
 
       await userAddress.save();
@@ -130,7 +133,7 @@ exports.setAddress = async (req, res, next) => {
         city,
         postal_code,
         phone_number,
-        user_id: user.id,
+        user_id: user.dataValues.id,
       });
     }
   } catch (error) {
@@ -146,22 +149,22 @@ exports.setAddress = async (req, res, next) => {
 
 exports.setOrderProducts = async (req, res, next) => {
   const { user } = req;
-  const products = req.body;
+  const { cart, orderId } = req.body;
 
   try {
     const order = await Orders.findOne({
       where: {
-        user_id: user.id,
+        id: orderId,
       },
     });
 
     await order.update({ status_id: 2 });
 
-    for (let i = 0; i < products.length; i++) {
+    for (let i = 0; i < cart.length; i++) {
       await OrderProducts.create({
         order_id: order.id,
-        product_id: products[i].product_id,
-        quantity: products[i].quantity,
+        product_id: cart[i].product_id,
+        quantity: cart[i].quantity,
       });
     }
 
@@ -181,7 +184,7 @@ exports.getUserAddress = async (req, res, next) => {
   try {
     const address = await UserAddress.findOne({
       where: {
-        user_id: user.id,
+        user_id: user.dataValues.id,
       },
     });
 
@@ -203,7 +206,7 @@ exports.getAllOrderProducts = async (req, res, next) => {
   try {
     const orders = await Orders.findAll({
       where: {
-        user_id: user.id,
+        user_id: user.dataValues.id,
       },
     });
 

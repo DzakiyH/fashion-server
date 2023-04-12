@@ -7,7 +7,7 @@ exports.addItemToCart = async (req, res, next) => {
   try {
     const cart = await Carts.findOne({
       where: {
-        user_id: user.id,
+        user_id: user.dataValues.id,
       },
     });
 
@@ -45,7 +45,7 @@ exports.getCartitems = async (req, res, next) => {
   try {
     const cart = await Carts.findOne({
       where: {
-        user_id: user.id,
+        user_id: user.dataValues.id,
       },
     });
 
@@ -74,7 +74,7 @@ exports.updateProductQuantity = async (req, res, next) => {
   try {
     const cart = await Carts.findOne({
       where: {
-        user_id: user.id,
+        user_id: user.dataValues.id,
       },
     });
 
