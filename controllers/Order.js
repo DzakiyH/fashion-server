@@ -254,3 +254,23 @@ exports.updateOrder = async (req, res, next) => {
     console.log(error.message);
   }
 };
+
+exports.deleteOrder = async (req, res, next) => {
+  const { orderId } = req.params;
+
+  try {
+    const orderDeleted = await Orders.destroy({
+      where: {
+        id: orderId,
+      },
+    });
+
+    return res.status(200).json({
+      status: 'success',
+      code: 200,
+      message: 'successfully deleted order',
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
